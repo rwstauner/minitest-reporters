@@ -57,7 +57,7 @@ module Minitest
       end
 
       def on_record(test)
-        print "#{"%.2f" % test.time} = " if options[:verbose]
+        print "%.2f | %.2f - %.2f - %.2f s = " % [test.time, *(test.times||{}).values_at(:setup, :test, :teardown).map(&:to_f)] if options[:verbose]
 
         # Print the pass/skip/fail mark
         print(if test.passed?
